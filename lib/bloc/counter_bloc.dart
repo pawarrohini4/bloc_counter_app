@@ -1,34 +1,38 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'counter_event.dart';
 import 'counter_state.dart';
 
 class CounterBloc extends Bloc<CounterEvent, CounterState> {
-  CounterBloc() : super(CounterState(counter: 0)) {
+  CounterBloc() : super(const CounterState(count: 0)) {
     
+    // INCREMENT
     on<Increment>((event, emit) {
-      if (state.counter < 10) {
+      if (state.count < 10) {
         emit(
           CounterState(
-            counter: state.counter + 1,
+            count: state.count + 1,
           ),
         );
       }
     });
 
+    // DECREMENT
     on<Decrement>((event, emit) {
-      if (state.counter > 0) {
+      if (state.count > 0) {
         emit(
           CounterState(
-            counter: state.counter - 1,
+            count: state.count - 1,
           ),
         );
       }
     });
 
+    // RESET
     on<Reset>((event, emit) {
       emit(
-        CounterState(
-          counter: 0,
+        const CounterState(
+          count: 0,
         ),
       );
     });
